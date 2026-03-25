@@ -2,227 +2,336 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Uktha Beauty World</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
-body {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background: #0d0d0d;
-  color: white;
+body{
+margin:0;
+font-family:'Poppins';
+background:#0d0d0d;
+color:white;
+scroll-behavior:smooth;
 }
 
-/* NAVBAR */
-nav {
-  display: flex;
-  justify-content: space-between;
-  padding: 15px 40px;
-  background: #161618;
+/* NAV */
+nav{
+display:flex;
+justify-content:space-between;
+padding:15px 30px;
+background:rgba(0,0,0,0.6);
+backdrop-filter:blur(10px);
+position:sticky;
+top:0;
 }
-nav h2 { color: #ff4d6d; }
+
+nav h2{
+color:#ff4d6d;
+}
 
 /* HERO */
-.hero {
-  height: 80vh;
-  background: url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9') no-repeat center/cover;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-.hero h1 {
-  font-size: 40px;
-  background: rgba(0,0,0,0.5);
-  padding: 10px 20px;
-  animation: fadeIn 2s ease;
+.hero{
+height:90vh;
+background:url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9') center/cover;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
 }
 
-@keyframes fadeIn {
-  from {opacity:0; transform: translateY(20px);}
-  to {opacity:1;}
+.hero h1{
+font-size:40px;
+background:rgba(0,0,0,0.6);
+padding:15px 25px;
+border-radius:10px;
+animation:fadeIn 2s;
 }
 
 /* SERVICES */
-.services {
-  padding: 40px;
-  text-align: center;
+.services{
+padding:50px 20px;
+text-align:center;
 }
-.cards {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  flex-wrap: wrap;
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
 }
-.card {
-  width: 200px;
-  background: #161618;
-  border-radius: 10px;
-  overflow: hidden;
-  transition: 0.3s;
+
+.card{
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(12px);
+border-radius:15px;
+overflow:hidden;
+transition:0.4s;
 }
-.card img {
-  width: 100%;
-  height: 150px;
-  object-fit: cover;
+
+.card:hover{
+transform:translateY(-10px) scale(1.03);
+box-shadow:0 10px 30px rgba(255,77,109,0.2);
 }
-.card:hover {
-  transform: scale(1.05);
+
+.card img{
+width:100%;
+height:160px;
+object-fit:cover;
+}
+
+.card-content{
+padding:15px;
+}
+
+.card h3{
+color:#ff4d6d;
 }
 
 /* FORM */
-.form-section {
-  padding: 40px;
-  text-align: center;
-}
-form {
-  max-width: 400px;
-  margin: auto;
-  background: #161618;
-  padding: 20px;
-  border-radius: 10px;
+.form-section{
+padding:50px 20px;
 }
 
-input, textarea, select {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border-radius: 6px;
-  border: none;
-  outline: none;
+form{
+max-width:450px;
+margin:auto;
+background:rgba(255,255,255,0.05);
+padding:25px;
+border-radius:15px;
+backdrop-filter:blur(12px);
 }
 
-button {
-  width: 100%;
-  padding: 12px;
-  background: #ff4d6d;
-  color: white;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  transition: 0.3s;
-}
-button:hover {
-  background: #e63956;
+input,select,textarea{
+width:100%;
+padding:12px;
+margin:8px 0;
+border:none;
+border-radius:8px;
 }
 
-/* SUCCESS MESSAGE */
-#successMsg {
-  display: none;
-  color: #4CAF50;
-  margin-top: 15px;
-  font-weight: 500;
+.error{
+border:2px solid red;
+animation:shake 0.3s;
 }
 
-footer {
-  text-align: center;
-  padding: 20px;
-  background: #161618;
+button{
+width:100%;
+padding:12px;
+background:linear-gradient(45deg,#ff4d6d,#ff758f);
+border:none;
+color:white;
+font-size:16px;
+border-radius:8px;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.05);
+}
+
+#successMsg{
+display:none;
+color:#4CAF50;
+margin-top:10px;
+}
+
+/* FOOTER */
+footer{
+text-align:center;
+padding:20px;
+background:#161618;
+}
+
+/* ANIMATION */
+@keyframes fadeIn{
+from{opacity:0;transform:translateY(30px);}
+to{opacity:1;}
+}
+
+@keyframes shake{
+0%,100%{transform:translateX(0);}
+25%{transform:translateX(-5px);}
+75%{transform:translateX(5px);}
+}
+
+/* MOBILE */
+@media(max-width:768px){
+.hero h1{font-size:22px;}
 }
 </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
 <nav>
-  <h2>💄 Uktha Beauty</h2>
+<h2>💄 Uktha Beauty</h2>
+<a href="tel:7092222856" style="color:#ff4d6d;">📞 Call</a>
 </nav>
 
-<!-- HERO -->
 <div class="hero">
-  <h1>Glow with Confidence ✨</h1>
+<h1>Glow with Confidence ✨</h1>
 </div>
 
 <!-- SERVICES -->
 <div class="services">
-  <h2>Our Services</h2>
+<h2>Our Premium Services</h2>
 
-  <div class="cards">
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6">
-      <p>Facial</p>
-    </div>
+<div class="cards">
 
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388">
-      <p>Hair Spa</p>
-    </div>
-
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1588776814546-ec7eaa3f1f1b">
-      <p>Manicure</p>
-    </div>
-  </div>
+<!-- CARD -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6">
+<div class="card-content">
+<h3>Facial</h3>
+<p>Glow, Cleanup, Bridal Facial</p>
+</div>
 </div>
 
-<!-- BOOKING FORM -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388">
+<div class="card-content">
+<h3>Hair Spa</h3>
+<p>Smoothening, Repair, Styling</p>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1588776814546-ec7eaa3f1f1b">
+<div class="card-content">
+<h3>Manicure</h3>
+<p>Nail care, Gel polish</p>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796">
+<div class="card-content">
+<h3>Pedicure</h3>
+<p>Foot spa, Nail polish</p>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1596464716127-f2a82984de30">
+<div class="card-content">
+<h3>Bridal Makeup</h3>
+<p>HD Makeup, Wedding look</p>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1599940824398-16a72df27b49">
+<div class="card-content">
+<h3>Hair Coloring</h3>
+<p>Highlights, Global color</p>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1599058917212-d750089bc07e">
+<div class="card-content">
+<h3>Threading</h3>
+<p>Eyebrow, Face threading</p>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1588776814546-ec7eaa3f1f1b">
+<div class="card-content">
+<h3>Waxing</h3>
+<p>Full body, Chocolate wax</p>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2">
+<div class="card-content">
+<h3>Skin Treatment</h3>
+<p>Acne, Glow therapy</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- FORM -->
 <div class="form-section">
-  <h2>Book Appointment</h2>
+<h2>Book Appointment</h2>
 
-  <form id="bookingForm">
-    <input type="text" id="name" placeholder="Name" required>
-    <input type="tel" id="phone" placeholder="Phone" required>
-    <input type="email" id="email" placeholder="Email">
-    <input type="date" id="date" required>
+<form id="form">
+<input id="name" placeholder="Name">
+<input id="phone" placeholder="Phone">
+<input id="email" placeholder="Email">
+<input type="date" id="date">
 
-    <!-- SERVICE DROPDOWN -->
-    <select id="service" required>
-      <option value="">Select Service</option>
-      <option>Facial</option>
-      <option>Hair Spa</option>
-      <option>Manicure</option>
-      <option>Pedicure</option>
-      <option>Bridal Makeup</option>
-    </select>
+<select id="service">
+<option value="">Select Service</option>
+<option>Facial</option>
+<option>Hair Spa</option>
+<option>Manicure</option>
+<option>Pedicure</option>
+<option>Bridal Makeup</option>
+<option>Hair Coloring</option>
+<option>Threading</option>
+<option>Waxing</option>
+<option>Skin Treatment</option>
+</select>
 
-    <textarea id="message" placeholder="Message"></textarea>
+<textarea id="message" placeholder="Message"></textarea>
 
-    <button type="submit">Book Now</button>
-  </form>
+<button>Book Now</button>
+</form>
 
-  <!-- SUCCESS MESSAGE -->
-  <p id="successMsg">✅ Booking Successful! We will contact you soon.</p>
+<p id="successMsg">✅ Booking Successful!</p>
 </div>
 
 <footer>
-  📞 7092222856 | Uktha Beauty World
+📞 <a href="tel:7092222856" style="color:#ff4d6d;">7092222856</a>
 </footer>
 
 <script>
-const API = "http://localhost:3000";
+const API="https://your-backend-url";
 
-document.getElementById("bookingForm").addEventListener("submit", async (e) => {
-  e.preventDefault();
+document.getElementById("form").addEventListener("submit",async(e)=>{
+e.preventDefault();
 
-  const data = {
-    name: document.getElementById("name").value,
-    phone: document.getElementById("phone").value,
-    email: document.getElementById("email").value,
-    date: document.getElementById("date").value,
-    service: document.getElementById("service").value,
-    message: document.getElementById("message").value
-  };
+let valid=true;
 
-  try {
-    const res = await fetch(API + "/book", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data)
-    });
+["name","phone","date","service"].forEach(id=>{
+let f=document.getElementById(id);
+if(!f.value){
+f.classList.add("error");
+valid=false;
+}else{
+f.classList.remove("error");
+}
+});
 
-    if(res.ok){
-      document.getElementById("successMsg").style.display = "block";
-      document.getElementById("bookingForm").reset();
-    } else {
-      throw new Error();
-    }
+if(!valid) return;
 
-  } catch (error) {
-    alert("❌ Booking Failed. Try again!");
-  }
+const data={
+name:name.value,
+phone:phone.value,
+email:email.value,
+date:date.value,
+service:service.value,
+message:message.value
+};
+
+const res=await fetch(API+"/book",{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify(data)
+});
+
+if(res.ok){
+successMsg.style.display="block";
+form.reset();
+}
 });
 </script>
 
