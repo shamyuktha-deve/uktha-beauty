@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Uktha Admin Dashboard</title>
+
+<style>
+body {
+  font-family: Arial;
+  background: #0d0d0d;
+  color: white;
+}
+
+h2 {
+  text-align: center;
+  margin: 20px;
+}
+
+table {
+  width: 95%;
+  margin: auto;
+  border-collapse: collapse;
+  background: #161618;
+}
+
+th, td {
+  padding: 12px;
+  border-bottom: 1px solid #222;
+}
+
+th {
+  background: #1c1c1e;
+  color: #888;
+  font-size: 12px;
+}
+
+/* STATUS */
+.status {
+  padding: 6px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.pending { background: rgba(255,193,7,0.2); color:#ffc107; }
+.confirmed { background: rgba(76,175,80,0.2); color:#4caf50; }
+.completed { background: rgba(66,165,245,0.2); color:#42a5f5; }
+.cancelled { background: rgba(239,83,80,0.2); color:#ef5350; }
+
+/* BUTTON */
+button {
+  padding: 6px 10px;
+  margin: 2px;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.view { background: #42a5f5; color: white; }
+.delete { background: red; color: white; }
+
+/* MODAL */
+.modal {
+  position: fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: rgba(0,0,0,0.7);
+  display:none;
+  justify-content:center;
+  align-items:center;
+}
+
+.modal-content {
+  background:#1c1c1e;
+  padding:20px;
+  width:400px;
+  border-radius:10px;
+}
+</style>
+</head>
+
+<body>
+
+<h2>📋 Uktha Admin Dashboard</h2>
+
+<table>
+<thead>
+<tr>
+  <th>#</th>
+  <th>Client</th>
+  <th>Phone</th>
+  <th>Service</th>
+  <th>Date</th>
+  <th>Status</th>
+  <th>Actions</th>
+</tr>
+</thead>
+
+<tbody id="data"></tbody>
+</table>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <h3>Booking Details</h3>
+    <div id="modal-body"></div>
+    <br>
+    <button onclick="closeModal()">Close</button>
+  </div>
+</div>
+
+<script>
+const API = "http://localhost:3000";
+
+// LOAD DATA
+async function loadData() {
+  const res = await fetch(API + "/bookings");
+  const data = await res.json();
+
+  let rows = "";
+
+  data.forEach((b, i) => {
+    rows += `
+    <tr>
+      <td>${i+1}</td>
+
+      <td>
+        <b>${b.name}</b><br>
+        <small style="color:#888">${b.email}</small>
+      </td>
+
+      <td>${b.phone}</td>
+      <td>${b.service}</td>
+      <td>${b.date || "-"}</td>
+
+      <td>
+        <select onchange="updateStatus('${b._id}', this.value)" class="${b.status.toLowerCase()} status">
+          <option ${b.status=="Pending"?"selected":""}>Pending</option>
+          <option ${b.status=="Confirmed"?"selected":""}>Confirmed</option>
+          <option ${b.status=="Completed"?"selected":""}>Completed</option>
+          <option ${b.status=="Cancelled"?"selected":""}>Cancelled</option>
+        </select>
+      </td>
+
+      <td>
+        <button class="view" onclick="viewBooking('${b._id}')">👁</button>
+        <button class="delete" onclick="deleteBooking('${b._id}')">🗑</button>
+      </td>
+    </tr>`;
+  });
+
+  document.getElementById("data").innerHTML = rows;
+}
+
+// UPDATE STATUS
+async function updateStatus(id, status) {
+  await fetch(`${API}/update/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ status })
+  });
+
+  loadData();
+}
+
+// VIEW DETAILS
+async function viewBooking(id) {
+  const res = await fetch(API + "/bookings");
+  const data = await res.json();
+  const b = data.find(x => x._id === id);
+
+  document.getElementById("modal-body").innerHTML = `
+    <p><b>Name:</b> ${b.name}</p>
+    <p><b>Phone:</b> ${b.phone}</p>
+    <p><b>Email:</b> ${b.email}</p>
+    <p><b>Service:</b> ${b.service}</p>
+    <p><b>Date:</b> ${b.date}</p>
+    <p><b>Message:</b> ${b.message || "No message"}</p>
+    <p><b>Status:</b> ${b.status}</p>
+    <p><b>Booked At:</b> ${new Date(b.createdAt).toLocaleString()}</p>
+  `;
+
+  document.getElementById("modal").style.display = "flex";
+}
+
+// CLOSE MODAL
+function closeModal() {
+  document.getElementById("modal").style.display = "none";
+}
+
+// DELETE
+async function deleteBooking(id) {
+  if(!confirm("Delete booking?")) return;
+
+  await fetch(`${API}/delete/${id}`, {
+    method: "DELETE"
+  });
+
+  loadData();
+}
+
+loadData();
+</script>
+
+</body>
+</html>

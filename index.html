@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Uktha Beauty World</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #0d0d0d;
+  color: white;
+}
+
+/* NAVBAR */
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 40px;
+  background: #161618;
+}
+nav h2 { color: #ff4d6d; }
+
+/* HERO */
+.hero {
+  height: 80vh;
+  background: url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9') no-repeat center/cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.hero h1 {
+  font-size: 40px;
+  background: rgba(0,0,0,0.5);
+  padding: 10px 20px;
+  animation: fadeIn 2s ease;
+}
+
+@keyframes fadeIn {
+  from {opacity:0; transform: translateY(20px);}
+  to {opacity:1;}
+}
+
+/* SERVICES */
+.services {
+  padding: 40px;
+  text-align: center;
+}
+.cards {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.card {
+  width: 200px;
+  background: #161618;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: 0.3s;
+}
+.card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+.card:hover {
+  transform: scale(1.05);
+}
+
+/* FORM */
+.form-section {
+  padding: 40px;
+  text-align: center;
+}
+form {
+  max-width: 400px;
+  margin: auto;
+  background: #161618;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+input, textarea, select {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: #ff4d6d;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
+}
+button:hover {
+  background: #e63956;
+}
+
+/* SUCCESS MESSAGE */
+#successMsg {
+  display: none;
+  color: #4CAF50;
+  margin-top: 15px;
+  font-weight: 500;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #161618;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <h2>💄 Uktha Beauty</h2>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>Glow with Confidence ✨</h1>
+</div>
+
+<!-- SERVICES -->
+<div class="services">
+  <h2>Our Services</h2>
+
+  <div class="cards">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6">
+      <p>Facial</p>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388">
+      <p>Hair Spa</p>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1588776814546-ec7eaa3f1f1b">
+      <p>Manicure</p>
+    </div>
+  </div>
+</div>
+
+<!-- BOOKING FORM -->
+<div class="form-section">
+  <h2>Book Appointment</h2>
+
+  <form id="bookingForm">
+    <input type="text" id="name" placeholder="Name" required>
+    <input type="tel" id="phone" placeholder="Phone" required>
+    <input type="email" id="email" placeholder="Email">
+    <input type="date" id="date" required>
+
+    <!-- SERVICE DROPDOWN -->
+    <select id="service" required>
+      <option value="">Select Service</option>
+      <option>Facial</option>
+      <option>Hair Spa</option>
+      <option>Manicure</option>
+      <option>Pedicure</option>
+      <option>Bridal Makeup</option>
+    </select>
+
+    <textarea id="message" placeholder="Message"></textarea>
+
+    <button type="submit">Book Now</button>
+  </form>
+
+  <!-- SUCCESS MESSAGE -->
+  <p id="successMsg">✅ Booking Successful! We will contact you soon.</p>
+</div>
+
+<footer>
+  📞 7092222856 | Uktha Beauty World
+</footer>
+
+<script>
+const API = "http://localhost:3000";
+
+document.getElementById("bookingForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const data = {
+    name: document.getElementById("name").value,
+    phone: document.getElementById("phone").value,
+    email: document.getElementById("email").value,
+    date: document.getElementById("date").value,
+    service: document.getElementById("service").value,
+    message: document.getElementById("message").value
+  };
+
+  try {
+    const res = await fetch(API + "/book", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    });
+
+    if(res.ok){
+      document.getElementById("successMsg").style.display = "block";
+      document.getElementById("bookingForm").reset();
+    } else {
+      throw new Error();
+    }
+
+  } catch (error) {
+    alert("❌ Booking Failed. Try again!");
+  }
+});
+</script>
+
+</body>
+</html>
