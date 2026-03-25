@@ -2,274 +2,229 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Uktha Admin Dashboard</title>
+<title>Uktha Beauty World</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
 body {
-  font-family: 'Segoe UI';
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
   background: #0d0d0d;
   color: white;
-  margin:0;
 }
 
-/* HEADER */
-.header {
-  text-align:center;
-  padding:20px;
-  font-size:24px;
-  font-weight:bold;
-  background: linear-gradient(90deg,#c9956b,#a07050);
-}
-
-/* TABLE */
-table {
-  width: 95%;
-  margin: 20px auto;
-  border-collapse: collapse;
+/* NAVBAR */
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 40px;
   background: #161618;
-  border-radius:10px;
-  overflow:hidden;
+}
+nav h2 { color: #ff4d6d; }
+
+/* HERO */
+.hero {
+  height: 80vh;
+  background: url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9') no-repeat center/cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.hero h1 {
+  font-size: 40px;
+  background: rgba(0,0,0,0.5);
+  padding: 10px 20px;
+  animation: fadeIn 2s ease;
 }
 
-th, td {
-  padding: 12px;
-  border-bottom: 1px solid #222;
-  text-align:center;
+@keyframes fadeIn {
+  from {opacity:0; transform: translateY(20px);}
+  to {opacity:1;}
 }
 
-th {
-  background: #1c1c1e;
-  color: #aaa;
-}
-
-/* STATUS */
-.status {
-  padding: 6px;
-  border-radius: 20px;
-}
-
-.pending { background: rgba(255,193,7,0.2); color:#ffc107; }
-.confirmed { background: rgba(76,175,80,0.2); color:#4caf50; }
-
-/* BUTTON */
-button {
-  padding: 6px 10px;
-  border-radius: 6px;
-  border:none;
-  cursor:pointer;
-}
-
-.view { background:#42a5f5; }
-.delete { background:red; }
-
-/* SERVICE CARDS */
+/* SERVICES */
 .services {
-  display:flex;
-  flex-wrap:wrap;
-  gap:20px;
-  padding:20px;
-  justify-content:center;
+  padding: 40px;
+  text-align: center;
 }
-
+.cards {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
 .card {
-  width:250px;
-  background:#161618;
-  border-radius:12px;
-  overflow:hidden;
-  transition:0.3s;
+  width: 200px;
+  background: #161618;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: 0.3s;
 }
-
-.card:hover {
-  transform:translateY(-5px);
-}
-
 .card img {
-  width:100%;
-  height:150px;
-  object-fit:cover;
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+.card:hover {
+  transform: scale(1.05);
 }
 
-.card-content {
-  padding:15px;
+/* FORM */
+.form-section {
+  padding: 40px;
+  text-align: center;
+}
+form {
+  max-width: 400px;
+  margin: auto;
+  background: #161618;
+  padding: 20px;
+  border-radius: 10px;
 }
 
-.card h3 {
-  color:#c9956b;
+input, textarea, select {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 6px;
+  border: none;
+  outline: none;
 }
 
-/* EMPTY FIELD */
-.empty {
-  border:1px solid red;
+button {
+  width: 100%;
+  padding: 12px;
+  background: #ff4d6d;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
+}
+button:hover {
+  background: #e63956;
 }
 
-/* MODAL */
-.modal {
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  display:none;
-  justify-content:center;
-  align-items:center;
-  background:rgba(0,0,0,0.8);
+/* SUCCESS MESSAGE */
+#successMsg {
+  display: none;
+  color: #4CAF50;
+  margin-top: 15px;
+  font-weight: 500;
 }
 
-.modal-content {
-  background:#1c1c1e;
-  padding:20px;
-  border-radius:10px;
-}
-
-/* RESPONSIVE */
-@media(max-width:768px){
-  table {font-size:12px;}
-  .services {flex-direction:column;align-items:center;}
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #161618;
 }
 </style>
 </head>
 
 <body>
 
-<div class="header">💄 Uktha Admin Dashboard</div>
+<!-- NAVBAR -->
+<nav>
+  <h2>💄 Uktha Beauty</h2>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>Glow with Confidence ✨</h1>
+</div>
 
 <!-- SERVICES -->
 <div class="services">
+  <h2>Our Services</h2>
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9">
-<div class="card-content">
-<h3>Facial</h3>
-<p>Cleanup, Glow facial, Bridal facial</p>
-</div>
-</div>
+  <div class="cards">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6">
+      <p>Facial</p>
+    </div>
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1556228720-195a672e8a03">
-<div class="card-content">
-<h3>Hair</h3>
-<p>Haircut, Smoothening, Coloring</p>
-</div>
-</div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388">
+      <p>Hair Spa</p>
+    </div>
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1596464716127-f2a82984de30">
-<div class="card-content">
-<h3>Spa</h3>
-<p>Relaxing spa, Body massage</p>
-</div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1588776814546-ec7eaa3f1f1b">
+      <p>Manicure</p>
+    </div>
+  </div>
 </div>
 
+<!-- BOOKING FORM -->
+<div class="form-section">
+  <h2>Book Appointment</h2>
+
+  <form id="bookingForm">
+    <input type="text" id="name" placeholder="Name" required>
+    <input type="tel" id="phone" placeholder="Phone" required>
+    <input type="email" id="email" placeholder="Email">
+    <input type="date" id="date" required>
+
+    <!-- SERVICE DROPDOWN -->
+    <select id="service" required>
+      <option value="">Select Service</option>
+      <option>Facial</option>
+      <option>Hair Spa</option>
+      <option>Manicure</option>
+      <option>Pedicure</option>
+      <option>Bridal Makeup</option>
+    </select>
+
+    <textarea id="message" placeholder="Message"></textarea>
+
+    <button type="submit">Book Now</button>
+  </form>
+
+  <!-- SUCCESS MESSAGE -->
+  <p id="successMsg">✅ Booking Successful! We will contact you soon.</p>
 </div>
 
-<!-- TABLE -->
-<table>
-<thead>
-<tr>
-<th>#</th>
-<th>Name</th>
-<th>Phone</th>
-<th>Service</th>
-<th>Date</th>
-<th>Status</th>
-<th>Actions</th>
-</tr>
-</thead>
-
-<tbody id="data"></tbody>
-</table>
-
-<!-- MODAL -->
-<div class="modal" id="modal">
-<div class="modal-content">
-<div id="modal-body"></div>
-<br>
-<button onclick="closeModal()">Close</button>
-</div>
-</div>
+<footer>
+  📞 7092222856 | Uktha Beauty World
+</footer>
 
 <script>
-const API = "https://your-backend-url"; // CHANGE THIS
+const API = "http://localhost:3000";
 
-async function loadData(){
-  const res = await fetch(API + "/bookings");
-  const data = await res.json();
+document.getElementById("bookingForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-  let rows = "";
+  const data = {
+    name: document.getElementById("name").value,
+    phone: document.getElementById("phone").value,
+    email: document.getElementById("email").value,
+    date: document.getElementById("date").value,
+    service: document.getElementById("service").value,
+    message: document.getElementById("message").value
+  };
 
-  data.forEach((b,i)=>{
-    rows += `
-    <tr>
-      <td>${i+1}</td>
+  try {
+    const res = await fetch(API + "/book", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    });
 
-      <td class="${!b.name?'empty':''}">${b.name||"Missing"}</td>
+    if(res.ok){
+      document.getElementById("successMsg").style.display = "block";
+      document.getElementById("bookingForm").reset();
+    } else {
+      throw new Error();
+    }
 
-      <td>
-        <a href="tel:${b.phone}">
-        ${b.phone||"Missing"}
-        </a>
-      </td>
-
-      <td>${b.service||"Missing"}</td>
-      <td>${b.date||"Missing"}</td>
-
-      <td>
-        <select onchange="updateStatus('${b._id}',this.value)" class="status">
-          <option ${b.status=="Pending"?"selected":""}>Pending</option>
-          <option ${b.status=="Confirmed"?"selected":""}>Confirmed</option>
-        </select>
-      </td>
-
-      <td>
-        <button class="view" onclick="viewBooking('${b._id}')">👁</button>
-        <button class="delete" onclick="deleteBooking('${b._id}')">🗑</button>
-      </td>
-    </tr>`;
-  });
-
-  document.getElementById("data").innerHTML = rows;
-}
-
-async function updateStatus(id,status){
-  await fetch(`${API}/update/${id}`,{
-    method:"PUT",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({status})
-  });
-  loadData();
-}
-
-async function viewBooking(id){
-  const res = await fetch(API + "/bookings");
-  const data = await res.json();
-  const b = data.find(x=>x._id===id);
-
-  document.getElementById("modal-body").innerHTML = `
-  <p><b>Name:</b> ${b.name}</p>
-  <p><b>Phone:</b> <a href="tel:${b.phone}">Call</a></p>
-  <p><b>Service:</b> ${b.service}</p>
-  <p><b>Date:</b> ${b.date}</p>
-  <p><b>Status:</b> ${b.status}</p>
-  `;
-
-  document.getElementById("modal").style.display="flex";
-}
-
-function closeModal(){
-  document.getElementById("modal").style.display="none";
-}
-
-async function deleteBooking(id){
-  if(!confirm("Delete?")) return;
-
-  await fetch(`${API}/delete/${id}`,{method:"DELETE"});
-  loadData();
-}
-
-loadData();
+  } catch (error) {
+    alert("❌ Booking Failed. Try again!");
+  }
+});
 </script>
 
 </body>
-</html>
 </html>
